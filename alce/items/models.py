@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from thumbs import ImageWithThumbsField
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 
 class item(models.Model):
     clave   = models.CharField(max_length=150, unique=True)
@@ -78,4 +80,8 @@ class telefono(models.Model):
     prove = models.ForeignKey('proveedor')
     def __unicode__(self):
         return '%s %s'%(self.prove, self.telefono)
-    
+
+
+@receiver(pre_delete, sender=foto)
+def foto_pre_delete_handler(sender, instance, **kwargs):
+    instance.foto.delete(False)
