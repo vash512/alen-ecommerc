@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from thumbs import ImageWithThumbsField
 
@@ -41,7 +42,7 @@ class foto(models.Model):
     item = models.ForeignKey('item')
     foto = ImageWithThumbsField(upload_to='items/galerias',sizes=((125,125),(200,200)))
     def __unicode__(self):
-        return '%s -- %s'%(self.item,self.id)
+        return u'%s -- %s'%(self.item,self.id)
 
 class categoria(models.Model):
     descripcion = models.CharField(max_length=150)
